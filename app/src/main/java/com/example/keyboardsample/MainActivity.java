@@ -65,6 +65,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    //Making a function to be called by datepicker to show date.
+    public void processDatePicker(int day, int month, int year){
+        String day_string = Integer.toString(day);
+        String month_string = Integer.toString(month+1);
+        String year_string = Integer.toString(year);
+        String dateMessage = day_string + "/" + month_string + "/" + year_string;
+        Toast.makeText(this, dateMessage,Toast.LENGTH_SHORT).show();
+    }
+
+    public void onProcessTimePicker(int hour, int minute){
+        String hours = Integer.toString(hour);
+        String minutes = Integer.toString(minute);
+        String dateMessage = hours + "." + minutes;
+        Toast.makeText(this, dateMessage,Toast.LENGTH_SHORT).show();
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,13 +108,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         findViewById(R.id.btn_datepicker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Calling (function)
                 showDataPicker();
             }
         });
+        findViewById(R.id.btn_timepicker).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calling (function)
+                showTimePicker();
+            }
+        });
     }
+    //Showing fragment (function)
     public void showDataPicker(){
         DialogFragment dateFragment = new DatePickerFragment();
         dateFragment.show(getSupportFragmentManager(), "date-picker");
+    }
+    public void showTimePicker(){
+        DialogFragment timeFragment = new TimePickerFragment();
+        timeFragment.show(getSupportFragmentManager(), "time-picker");
     }
 
 
